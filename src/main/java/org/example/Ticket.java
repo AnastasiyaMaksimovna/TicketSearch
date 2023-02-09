@@ -23,9 +23,6 @@ public class Ticket implements Comparable<Ticket> {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
 
     public int getId() {
         return id;
