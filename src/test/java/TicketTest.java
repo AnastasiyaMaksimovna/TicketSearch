@@ -107,6 +107,37 @@ public class TicketTest {
     }
 
     @Test
+    public void findByIdZeroTest() {
+        RepositoryTicket repo = new RepositoryTicket();
+        Ticket ticket = new Ticket(111, 1000);
+        Ticket ticket2 = new Ticket(333, 2199);
+        repo.addTicket(ticket);
+        repo.addTicket(ticket2);
+
+
+        Ticket expected = null;
+        Ticket actual = repo.findById(335);
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void findByIdTwoTest() {
+        RepositoryTicket repo = new RepositoryTicket();
+        Ticket ticket = new Ticket(111, 1000);
+        Ticket ticket2 = new Ticket(333, 2199);
+        repo.addTicket(ticket);
+        repo.addTicket(ticket2);
+        repo.findById(111);
+        repo.findById(333);
+
+        Ticket[] expected = {ticket, ticket2};
+        Ticket[] actual = repo.getTickets();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void findAllTest() {
         RepositoryTicket repositoryTicket = new RepositoryTicket();
         ManagerTicket repo = new ManagerTicket(repositoryTicket);
@@ -119,7 +150,46 @@ public class TicketTest {
         repo.add(ticket2);
         repo.add(ticket3);
 
-        repo.findAll("SVO", "KZN");
+
+        Ticket[] expected = {ticket, ticket3};
+        Ticket[] actual = repo.findAll("SVO", "KZN");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findAllZeroTest() {
+        RepositoryTicket repositoryTicket = new RepositoryTicket();
+        ManagerTicket repo = new ManagerTicket(repositoryTicket);
+
+        Ticket ticket = new Ticket("SVO", "KZN", 13560);
+        Ticket ticket2 = new Ticket("VKO", "KZN", 14845);
+        Ticket ticket3 = new Ticket("SVO", "KZN", 15560);
+
+        repo.add(ticket);
+        repo.add(ticket2);
+        repo.add(ticket3);
+
+
+        Ticket[] expected = {};
+        Ticket[] actual = repo.findAll("EGO", "KZN");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findAllTwoTest() {
+        RepositoryTicket repositoryTicket = new RepositoryTicket();
+        ManagerTicket repo = new ManagerTicket(repositoryTicket);
+
+        Ticket ticket = new Ticket("SVO", "KZN", 13560);
+        Ticket ticket2 = new Ticket("VKO", "KZN", 14845);
+        Ticket ticket3 = new Ticket("SVO", "KZN", 15560);
+
+        repo.add(ticket);
+        repo.add(ticket2);
+        repo.add(ticket3);
+
 
         Ticket[] expected = {ticket, ticket3};
         Ticket[] actual = repo.findAll("SVO", "KZN");

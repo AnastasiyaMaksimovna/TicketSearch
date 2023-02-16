@@ -50,6 +50,4 @@ public class Ticket implements Comparable<Ticket> {
         this.to = to;
         this.price = price;
     }
-
-
 }
